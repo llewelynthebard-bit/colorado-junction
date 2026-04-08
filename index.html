@@ -16,16 +16,16 @@
     }
 
     :root {
-      --cream:    #e8edd8;
-      --sage:     #a8bc8a;
-      --forest:   #3a5c30;
-      --dark:     #1a2e12;
-      --darker:   #0e1a08;
-      --pine:     #2d4a20;
-      --moss:     #5a7a48;
-      --stone:    #8a9a7a;
-      --sky:      #5b8fa8;
-      --paper:    #f0f5e8;
+      --cream:    #f0e0c4;
+      --sage:     #c9a96e;
+      --forest:   #7a3d1a;
+      --dark:     #2a1508;
+      --darker:   #160b04;
+      --pine:     #5c2e12;
+      --moss:     #9e5e30;
+      --stone:    #9a7858;
+      --sky:      #6b9fc0;
+      --paper:    #f5e8d4;
     }
 
     body {
@@ -41,7 +41,7 @@
     header {
       text-align: center;
       padding: 3rem 1rem 1.5rem;
-      background: linear-gradient(to bottom, #050f03, var(--darker));
+      background: linear-gradient(to bottom, #0f0804, var(--darker));
       border-bottom: 2px solid var(--forest);
       position: relative;
       overflow: hidden;
@@ -73,9 +73,9 @@
       text-transform: uppercase;
       color: var(--sage);
       text-shadow: 2px 3px 0 var(--darker),
-                   0 0 20px rgba(168, 188, 138, 0.5),
-                   0 0 50px rgba(90, 122, 72, 0.35),
-                   0 0 90px rgba(45, 74, 32, 0.2);
+                   0 0 20px rgba(201, 169, 110, 0.5),
+                   0 0 50px rgba(158, 94, 48, 0.35),
+                   0 0 90px rgba(92, 46, 18, 0.2);
       line-height: 1;
       animation: title-glow 4s ease-in-out infinite;
     }
@@ -83,15 +83,15 @@
     @keyframes title-glow {
       0%, 100% {
         text-shadow: 2px 3px 0 var(--darker),
-                     0 0 20px rgba(168, 188, 138, 0.45),
-                     0 0 50px rgba(90, 122, 72, 0.3),
-                     0 0 90px rgba(45, 74, 32, 0.15);
+                     0 0 20px rgba(201, 169, 110, 0.45),
+                     0 0 50px rgba(158, 94, 48, 0.3),
+                     0 0 90px rgba(92, 46, 18, 0.15);
       }
       50% {
         text-shadow: 2px 3px 0 var(--darker),
-                     0 0 30px rgba(168, 188, 138, 0.85),
-                     0 0 70px rgba(90, 122, 72, 0.6),
-                     0 0 120px rgba(45, 74, 32, 0.4);
+                     0 0 30px rgba(201, 169, 110, 0.85),
+                     0 0 70px rgba(158, 94, 48, 0.6),
+                     0 0 120px rgba(92, 46, 18, 0.4);
       }
     }
 
@@ -99,20 +99,20 @@
       margin-top: 0.55rem;
       font-size: 1.6rem;
       letter-spacing: 5px;
-      color: rgba(168, 188, 138, 0.85);
+      color: rgba(201, 169, 110, 0.85);
       text-transform: uppercase;
     }
 
     header .tagline {
       margin-top: 0.65rem;
-      border-top: 1px solid rgba(168, 188, 138, 0.25);
+      border-top: 1px solid rgba(201, 169, 110, 0.25);
       padding-top: 0.55rem;
       width: fit-content;
       margin-left: auto;
       margin-right: auto;
       font-size: 0.78rem;
       letter-spacing: 2px;
-      color: rgba(168, 188, 138, 0.7);
+      color: rgba(201, 169, 110, 0.7);
       text-transform: uppercase;
       font-style: italic;
       -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.4);
@@ -130,7 +130,7 @@
       background: none;
       border: none;
       border-bottom: 3px solid transparent;
-      color: rgba(168, 188, 138, 0.55);
+      color: rgba(201, 169, 110, 0.55);
       font-family: 'Georgia', serif;
       font-size: 0.85rem;
       letter-spacing: 3px;
@@ -196,7 +196,7 @@
       gap: 2rem;
       align-items: flex-start;
       padding-bottom: 2.5rem;
-      border-bottom: 1px solid rgba(168, 188, 138, 0.15);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.15);
     }
 
     .record:last-child {
@@ -251,7 +251,7 @@
 
     .record-details .record-desc {
       font-size: 0.95rem;
-      color: rgba(232, 237, 216, 0.65);
+      color: rgba(240, 224, 196, 0.65);
       line-height: 1.7;
       margin-top: 0.8rem;
       font-style: italic;
@@ -282,7 +282,7 @@
 
     /* ── SHOWS PANEL ── */
     .song-item {
-      border: 1px solid rgba(58, 92, 48, 0.35);
+      border: 1px solid rgba(122, 61, 26, 0.35);
       border-radius: 4px;
       overflow: hidden;
       margin-top: 1rem;
@@ -298,7 +298,7 @@
       transition: background 0.2s;
     }
 
-    .song-header:hover { background: rgba(58, 92, 48, 0.2); }
+    .song-header:hover { background: rgba(122, 61, 26, 0.2); }
 
     .song-title {
       font-size: 1.1rem;
@@ -309,7 +309,7 @@
 
     .song-credits {
       font-size: 0.8rem;
-      color: rgba(168, 188, 138, 0.6);
+      color: rgba(201, 169, 110, 0.6);
       margin-top: 0.2rem;
     }
 
@@ -329,8 +329,8 @@
       font-family: inherit;
       font-size: 0.9rem;
       line-height: 1.8;
-      color: rgba(168, 188, 138, 0.85);
-      border-top: 1px solid rgba(58, 92, 48, 0.25);
+      color: rgba(201, 169, 110, 0.85);
+      border-top: 1px solid rgba(122, 61, 26, 0.25);
     }
 
     .song-item.open .song-lyrics { display: block; }
@@ -348,14 +348,14 @@
       align-items: center;
       gap: 1.5rem;
       padding: 1.3rem 1.6rem;
-      border: 1px solid rgba(58, 92, 48, 0.35);
-      background: rgba(26, 46, 18, 0.4);
+      border: 1px solid rgba(122, 61, 26, 0.35);
+      background: rgba(42, 21, 8, 0.4);
       transition: border-color 0.2s, background 0.2s;
     }
 
     .show-item:hover {
       border-color: var(--forest);
-      background: rgba(26, 46, 18, 0.7);
+      background: rgba(42, 21, 8, 0.7);
     }
 
     .show-date {
@@ -381,7 +381,7 @@
     .show-date .year {
       display: block;
       font-size: 0.7rem;
-      color: rgba(168, 188, 138, 0.4);
+      color: rgba(201, 169, 110, 0.4);
       letter-spacing: 2px;
     }
 
@@ -393,7 +393,7 @@
 
     .show-info p {
       font-size: 0.82rem;
-      color: rgba(168, 188, 138, 0.6);
+      color: rgba(201, 169, 110, 0.6);
       margin-top: 0.25rem;
       letter-spacing: 0.5px;
     }
@@ -417,7 +417,7 @@
 
     .no-shows {
       font-style: italic;
-      color: rgba(168, 188, 138, 0.45);
+      color: rgba(201, 169, 110, 0.45);
       margin-top: 2rem;
     }
 
@@ -502,14 +502,14 @@
     .band-photo {
       width: 100%;
       display: block;
-      border: 1px solid rgba(58, 92, 48, 0.4);
+      border: 1px solid rgba(122, 61, 26, 0.4);
       border-radius: 3px;
     }
 
     .about-text p {
       font-size: 1rem;
       line-height: 1.85;
-      color: rgba(232, 237, 216, 0.75);
+      color: rgba(240, 224, 196, 0.75);
       margin-bottom: 1.2rem;
     }
 
@@ -520,7 +520,7 @@
       text-align: center;
       gap: 0.6rem;
       padding: 1rem 0.75rem;
-      background: rgba(26, 46, 18, 0.5);
+      background: rgba(42, 21, 8, 0.5);
       border-top: 3px solid var(--moss);
       text-decoration: none;
       color: inherit;
@@ -528,7 +528,7 @@
     }
 
     .member:hover {
-      background: rgba(26, 46, 18, 0.8);
+      background: rgba(42, 21, 8, 0.8);
     }
 
     .member-icon {
@@ -546,7 +546,7 @@
 
     .member-info p {
       font-size: 0.8rem;
-      color: rgba(168, 188, 138, 0.5);
+      color: rgba(201, 169, 110, 0.5);
       margin-top: 0.15rem;
       font-style: italic;
     }
@@ -582,7 +582,7 @@
 
     .contact-intro {
       font-size: 0.95rem;
-      color: rgba(232, 237, 216, 0.6);
+      color: rgba(240, 224, 196, 0.6);
       line-height: 1.7;
       margin-bottom: 2rem;
       font-style: italic;
@@ -608,7 +608,7 @@
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid rgba(58, 92, 48, 0.3);
+      border-top: 1px solid rgba(122, 61, 26, 0.3);
       padding: 1.8rem 2rem;
       text-align: center;
       background: var(--darker);
@@ -622,7 +622,7 @@
     }
 
     .social-links a {
-      color: rgba(168, 188, 138, 0.4);
+      color: rgba(201, 169, 110, 0.4);
       text-decoration: none;
       font-size: 0.75rem;
       letter-spacing: 2px;
@@ -636,7 +636,7 @@
 
     footer p {
       font-size: 0.72rem;
-      color: rgba(168, 188, 138, 0.2);
+      color: rgba(201, 169, 110, 0.2);
       letter-spacing: 1px;
     }
 
@@ -721,7 +721,7 @@
 
     .player-index {
       font-size: 0.62rem;
-      color: rgba(168, 188, 138, 0.45);
+      color: rgba(201, 169, 110, 0.45);
       letter-spacing: 1px;
       flex-shrink: 0;
     }
@@ -731,7 +731,7 @@
       height: 3px;
       -webkit-appearance: none;
       appearance: none;
-      background: rgba(58, 92, 48, 0.4);
+      background: rgba(122, 61, 26, 0.4);
       border-radius: 2px;
       cursor: pointer;
       outline: none;
@@ -760,7 +760,7 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.6rem;
-      color: rgba(168, 188, 138, 0.4);
+      color: rgba(201, 169, 110, 0.4);
       margin-top: 0.3rem;
       letter-spacing: 0.5px;
     }
@@ -776,7 +776,7 @@
     .player-controls button {
       background: none;
       border: none;
-      color: rgba(168, 188, 138, 0.6);
+      color: rgba(201, 169, 110, 0.6);
       font-size: 0.85rem;
       cursor: pointer;
       padding: 0.3rem 0.5rem;
@@ -795,8 +795,8 @@
 
     .player-select {
       width: 100%;
-      background: rgba(26, 46, 18, 0.9);
-      border: 1px solid rgba(58, 92, 48, 0.5);
+      background: rgba(42, 21, 8, 0.9);
+      border: 1px solid rgba(122, 61, 26, 0.5);
       color: var(--sage);
       font-family: 'Georgia', serif;
       font-size: 0.72rem;
@@ -809,7 +809,7 @@
 
     .player-empty {
       font-size: 0.72rem;
-      color: rgba(168, 188, 138, 0.4);
+      color: rgba(201, 169, 110, 0.4);
       font-style: italic;
       text-align: center;
       padding: 0.25rem 0;
@@ -848,7 +848,7 @@
       font-size: 0.6rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(168, 188, 138, 0.5);
+      color: rgba(201, 169, 110, 0.5);
       text-align: center;
       line-height: 1;
     }
@@ -896,7 +896,7 @@
     }
 
     .gc-btn {
-      background: rgba(26, 46, 18, 0.7);
+      background: rgba(42, 21, 8, 0.7);
       border: 1px solid var(--forest);
       color: var(--sage);
       font-size: 1.1rem;
@@ -920,7 +920,7 @@
 
     .game-hint {
       font-size: 0.72rem;
-      color: rgba(168, 188, 138, 0.3);
+      color: rgba(201, 169, 110, 0.3);
       font-style: italic;
       text-align: center;
       margin-top: 0.75rem;
@@ -986,36 +986,31 @@
         </div>
         <div class="members-grid">
           <div class="member">
-            <div class="member-icon">🎻</div>
-            <div class="member-info">
+<div class="member-info">
               <h3>Troy Yanel</h3>
               <p>Vocals, Guitar</p>
             </div>
           </div>
           <div class="member">
-            <div class="member-icon">🎻</div>
-            <div class="member-info">
+<div class="member-info">
               <h3>Bobby Krech</h3>
               <p>Fiddle, Vocals</p>
             </div>
           </div>
           <div class="member">
-            <div class="member-icon">🎻</div>
-            <div class="member-info">
+<div class="member-info">
               <h3>Yaniz Salzberg</h3>
               <p>Stand Up Bass, Vocals</p>
             </div>
           </div>
           <div class="member">
-            <div class="member-icon">🎻</div>
-            <div class="member-info">
+<div class="member-info">
               <h3>Chris Spurlock</h3>
               <p>Mandolin, Vocals</p>
             </div>
           </div>
           <div class="member">
-            <div class="member-icon">🎻</div>
-            <div class="member-info">
+<div class="member-info">
               <h3>Jonah Salzman-Cohen</h3>
               <p>Banjo, Vocals</p>
             </div>
