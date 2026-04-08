@@ -1100,7 +1100,11 @@
       }
 
       function formatDate(dateStr) {
-        const d = new Date(dateStr + 'T12:00:00');
+        // handles M/D/YYYY or YYYY-MM-DD
+        const parts = dateStr.includes('/') ? dateStr.split('/') : null;
+        const d = parts
+          ? new Date(+parts[2], +parts[0] - 1, +parts[1])
+          : new Date(dateStr + 'T12:00:00');
         if (isNaN(d)) return { month: '—', day: '—', year: '—' };
         return {
           month: d.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
@@ -1115,7 +1119,7 @@
           const shows = parseCSV(text);
           if (!shows.length) return;
           list.innerHTML = '';
-          shows.forEach(([date, venue, city, details, ticketURL]) => {
+          shows.forEach(([date, venue, city, time, ticketURL]) => {
             const { month, day, year } = formatDate(date);
             const ticket = ticketURL
               ? `<a href="${ticketURL}" class="show-ticket" target="_blank" rel="noopener">Tickets</a>`
@@ -1129,7 +1133,7 @@
                 </div>
                 <div class="show-info">
                   <h3>${venue}</h3>
-                  <p>${city}${details ? ' &mdash; ' + details : ''}</p>
+                  <p>${city}${time ? ' &mdash; ' + time : ''}</p>
                 </div>
                 ${ticket}
               </div>`;
