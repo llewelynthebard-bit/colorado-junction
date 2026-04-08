@@ -351,6 +351,9 @@
       border: 1px solid rgba(74, 32, 16, 0.35);
       background: rgba(42, 18, 8, 0.4);
       transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
 
     .show-item:hover {
@@ -1125,8 +1128,9 @@
             const ticket = ticketURL
               ? `<a href="${ticketURL}" class="show-ticket" target="_blank" rel="noopener">Tickets</a>`
               : '';
+            const mapsURL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(venue + ' ' + city);
             list.innerHTML += `
-              <div class="show-item">
+              <a class="show-item" href="${mapsURL}" target="_blank" rel="noopener" title="Open in Google Maps">
                 <div class="show-date">
                   <span class="month">${month}</span>
                   <span class="day">${day}</span>
@@ -1138,7 +1142,7 @@
                   <p>${city}${time ? ' &mdash; ' + time : ''}</p>
                 </div>
                 ${ticket}
-              </div>`;
+              </a>`;
           });
         })
         .catch(() => {}); // silently keep the "no shows" fallback
