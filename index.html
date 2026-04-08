@@ -1079,6 +1079,65 @@
       setInterval(spawnLeaf, 1800);
     })();
 
+    // Load shows from Google Sheet CSV
+    (function () {
+      const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAoVlTfCmGhmWteXosd6iLhkXV43wUDgVFTBAw7ZRR0Pkd_trISYNxYwPrHkprRzw_wtjTMmgVZ9mV/pub?gid=0&single=true&output=csv';
+      const list = document.querySelector('.shows-list');
+
+      function parseCSV(text) {
+        const rows = text.trim().split('\n').slice(1); // skip header
+        return rows.map(row => {
+          const cols = [];
+          let cur = '', inQ = false;
+          for (let c of row) {
+            if (c === '"') { inQ = !inQ; }
+            else if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+            else cur += c;
+          }
+          cols.push(cur.trim());
+          return cols;
+        }).filter(r => r[0]);
+      }
+
+      function formatDate(dateStr) {
+        const d = new Date(dateStr + 'T12:00:00');
+        if (isNaN(d)) return { month: '—', day: '—', year: '—' };
+        return {
+          month: d.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
+          day:   d.getDate(),
+          year:  d.getFullYear()
+        };
+      }
+
+      fetch(CSV_URL)
+        .then(r => r.text())
+        .then(text => {
+          const shows = parseCSV(text);
+          if (!shows.length) return;
+          list.innerHTML = '';
+          shows.forEach(([date, venue, city, details, ticketURL]) => {
+            const { month, day, year } = formatDate(date);
+            const ticket = ticketURL
+              ? `<a href="${ticketURL}" class="show-ticket" target="_blank" rel="noopener">Tickets</a>`
+              : '';
+            list.innerHTML += `
+              <div class="show-item">
+                <div class="show-date">
+                  <span class="month">${month}</span>
+                  <span class="day">${day}</span>
+                  <span class="year">${year}</span>
+                </div>
+                <div class="show-info">
+                  <h3>${venue}</h3>
+                  <p>${city}${details ? ' &mdash; ' + details : ''}</p>
+                </div>
+                ${ticket}
+              </div>`;
+          });
+        })
+        .catch(() => {}); // silently keep the "no shows" fallback
+    })();
+
     // Tab switching
     (function () {
       const nav    = document.querySelector('.tab-nav');
