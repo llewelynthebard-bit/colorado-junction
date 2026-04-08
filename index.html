@@ -1107,9 +1107,10 @@
           : new Date(dateStr + 'T12:00:00');
         if (isNaN(d)) return { month: '—', day: '—', year: '—' };
         return {
-          month: d.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
-          day:   d.getDate(),
-          year:  d.getFullYear()
+          month:   d.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
+          day:     d.getDate(),
+          year:    d.getFullYear(),
+          weekday: d.toLocaleString('en-US', { weekday: 'short' }).toUpperCase()
         };
       }
 
@@ -1120,7 +1121,7 @@
           if (!shows.length) return;
           list.innerHTML = '';
           shows.forEach(([date, venue, city, time, ticketURL]) => {
-            const { month, day, year } = formatDate(date);
+            const { month, day, year, weekday } = formatDate(date);
             const ticket = ticketURL
               ? `<a href="${ticketURL}" class="show-ticket" target="_blank" rel="noopener">Tickets</a>`
               : '';
@@ -1130,6 +1131,7 @@
                   <span class="month">${month}</span>
                   <span class="day">${day}</span>
                   <span class="year">${year}</span>
+                  <span class="month">${weekday}</span>
                 </div>
                 <div class="show-info">
                   <h3>${venue}</h3>
