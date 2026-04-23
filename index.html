@@ -424,6 +424,27 @@
       margin-top: 2rem;
     }
 
+    .previous-shows-section {
+      margin-top: 3rem;
+    }
+
+    .previous-shows-section h2 {
+      opacity: 0.55;
+    }
+
+    .previous-shows-section .shows-list {
+      margin-top: 1.5rem;
+    }
+
+    .previous-shows-section .show-item {
+      opacity: 0.45;
+      filter: grayscale(30%);
+    }
+
+    .previous-shows-section .show-item:hover {
+      opacity: 0.65;
+    }
+
     /* ── ABOUT PANEL ── */
     .about-body {
       margin-top: 2.5rem;
@@ -1019,8 +1040,12 @@
   <div class="tab-panel" id="tab-shows" role="tabpanel">
     <div class="panel-inner">
       <h2>Upcoming Shows</h2>
-      <div class="shows-list">
+      <div class="shows-list" id="upcoming-shows-list">
         <p class="no-shows">No upcoming shows scheduled &mdash; check back soon.</p>
+      </div>
+      <div class="previous-shows-section" id="previous-shows-section" style="display:none;">
+        <h2>Previous Shows</h2>
+        <div class="shows-list" id="previous-shows-list"></div>
       </div>
     </div>
   </div>
@@ -1154,7 +1179,9 @@
     // Load shows from Google Sheet CSV
     (function () {
       const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAoVlTfCmGhmWteXosd6iLhkXV43wUDgVFTBAw7ZRR0Pkd_trISYNxYwPrHkprRzw_wtjTMmgVZ9mV/pub?gid=0&single=true&output=csv';
-      const list = document.querySelector('.shows-list');
+      const upcomingList = document.getElementById('upcoming-shows-list');
+      const previousList = document.getElementById('previous-shows-list');
+      const previousSection = document.getElementById('previous-shows-section');
 
       function parseCSV(text) {
         const rows = text.trim().split('\n').slice(1); // skip header
@@ -1171,13 +1198,15 @@
         }).filter(r => r[0]);
       }
 
-      function formatDate(dateStr) {
-        // handles M/D/YYYY or YYYY-MM-DD
+      function parseShowDate(dateStr) {
         const parts = dateStr.includes('/') ? dateStr.split('/') : null;
-        const d = parts
+        return parts
           ? new Date(+parts[2], +parts[0] - 1, +parts[1])
           : new Date(dateStr + 'T12:00:00');
-        if (isNaN(d)) return { month: '—', day: '—', year: '—' };
+      }
+
+      function formatDate(d) {
+        if (isNaN(d)) return { month: '—', day: '—', year: '—', weekday: '—' };
         return {
           month:   d.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
           day:     d.getDate(),
@@ -1186,33 +1215,57 @@
         };
       }
 
+      function buildShowHTML([date, venue, city, time, ticketURL]) {
+        const d = parseShowDate(date);
+        const { month, day, year, weekday } = formatDate(d);
+        const ticket = ticketURL
+          ? `<a href="${ticketURL}" class="show-ticket" target="_blank" rel="noopener">Tickets</a>`
+          : '';
+        const mapsURL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(venue + ' ' + city);
+        return { d, html: `
+          <a class="show-item" href="${mapsURL}" target="_blank" rel="noopener" title="Open in Google Maps">
+            <div class="show-date">
+              <span class="month">${month}</span>
+              <span class="day">${day}</span>
+              <span class="year">${year}</span>
+              <span class="month">${weekday}</span>
+            </div>
+            <div class="show-info">
+              <h3>${venue}</h3>
+              <p>${city}${time ? ' &mdash; ' + time : ''}</p>
+            </div>
+            ${ticket}
+          </a>` };
+      }
+
       fetch(CSV_URL)
         .then(r => r.text())
         .then(text => {
           const shows = parseCSV(text);
           if (!shows.length) return;
-          list.innerHTML = '';
-          shows.forEach(([date, venue, city, time, ticketURL]) => {
-            const { month, day, year, weekday } = formatDate(date);
-            const ticket = ticketURL
-              ? `<a href="${ticketURL}" class="show-ticket" target="_blank" rel="noopener">Tickets</a>`
-              : '';
-            const mapsURL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(venue + ' ' + city);
-            list.innerHTML += `
-              <a class="show-item" href="${mapsURL}" target="_blank" rel="noopener" title="Open in Google Maps">
-                <div class="show-date">
-                  <span class="month">${month}</span>
-                  <span class="day">${day}</span>
-                  <span class="year">${year}</span>
-                  <span class="month">${weekday}</span>
-                </div>
-                <div class="show-info">
-                  <h3>${venue}</h3>
-                  <p>${city}${time ? ' &mdash; ' + time : ''}</p>
-                </div>
-                ${ticket}
-              </a>`;
+
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          const upcoming = [];
+          const previous = [];
+
+          shows.forEach(show => {
+            const { d, html } = buildShowHTML(show);
+            (d >= today ? upcoming : previous).push({ d, html });
           });
+
+          upcoming.sort((a, b) => a.d - b.d);
+          previous.sort((a, b) => b.d - a.d); // most recent first
+
+          if (upcoming.length) {
+            upcomingList.innerHTML = upcoming.map(s => s.html).join('');
+          }
+
+          if (previous.length) {
+            previousList.innerHTML = previous.map(s => s.html).join('');
+            previousSection.style.display = '';
+          }
         })
         .catch(() => {}); // silently keep the "no shows" fallback
     })();
