@@ -1267,7 +1267,7 @@
             previousSection.style.display = '';
           }
         })
-        .catch(() => {}); // silently keep the "no shows" fallback
+        .catch(err => { console.error('Shows load error:', err); }); // keep "no shows" fallback
     })();
 
     // Tab switching
